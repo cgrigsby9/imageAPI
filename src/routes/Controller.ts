@@ -8,19 +8,19 @@ const fsPromises = require("fs").promises;
 const router: Router = express.Router();
 
 router.get("/", async (req: Request, res: Response) => {
-  const image = req.query.name;
+  const image = req.query.name as string;
   const widthString = req.query.width;
   const heightString = req.query.height;
   const widthNum = Number(widthString);
   const heightNum = Number(heightString);
 
-  const localImage = path.join(__dirname, "../../images", `${image}.jpg`);
-  const newImage = path.join(
+  const localImage: string = path.join(__dirname, "../../images", `${image}.jpg`);
+  const newImage: string = path.join(
     __dirname,
     "../../resized",
     `${image}_${widthNum}_${heightNum}.jpg`
   );
-  const resizedImage = path.join(
+  const resizedImage: string = path.join(
     __dirname,
     "../../",
     `${image}_${widthNum}_${heightNum}.jpg`
@@ -44,7 +44,7 @@ router.get("/", async (req: Request, res: Response) => {
             }
           });
         })
-        .catch(function (error: any) {
+        .catch(function (error: any): void {
           console.log(error);
         });
     } catch (err) {
