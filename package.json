@@ -15,7 +15,6 @@
     "start": "nodemon src/index.ts"
   },
   "author": "",
-  "type": "module",
   "license": "ISC",
   "description": "",
   "devDependencies": {

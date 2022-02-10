@@ -30,29 +30,29 @@ router.get('/', async (req: Request, res: Response): Promise<void> => {
     `${image}_${widthNum}_${heightNum}.jpg`
   );
   if (fs.existsSync(newImage)) {
-        res.sendFile(newImage);
-  } else {
-        try {
-      await resize(localImage, widthNum, heightNum, image);
-      await fsPromises
-        .copyFile(resizedImage, newImage)
-        .then(function () {
-          fs.unlink(resizedImage, (err: any) => {
-            if (err) {
-              res.send("check URL for correct inputs")
-              return;
-            } else {
-              console.log(`deleted file: ${resizedImage}`);
-            }
-          });
-        })
-        .catch(function (error: any): void {
-          res.send('check URL for correct inputs example: fjord&width=100&height=100')
-        });
-    } catch (err) {
-      console.log(err);
-    }
     res.sendFile(newImage);
-  }
+} else {
+    try {
+  await resize(localImage, widthNum, heightNum, image);
+  await fsPromises
+    .copyFile(resizedImage, newImage)
+    .then(function () {
+      fs.unlink(resizedImage, (err: any) => {
+        if (err) {
+          res.send("check URL for correct inputs")
+          return;
+        } else {
+          console.log(`deleted file: ${resizedImage}`);
+        }
+      });
+    })
+    .catch(function (error: any): void {
+      res.send('check URL for correct inputs example: fjord&width=100&height=100')
+    });
+} catch (err) {
+  res.send('Check URL for correct inputs')
+}
+res.sendFile(newImage);
+}
 });
 export default router;
