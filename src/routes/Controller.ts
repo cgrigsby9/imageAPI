@@ -50,7 +50,7 @@ router.get('/', async (req: Request, res: Response): Promise<void> => {
       res.send('check URL for correct inputs example: fjord&width=100&height=100')
     });
 } catch (err) {
-  res.send('Check URL for correct inputs')
+  res.send('Check URL for correct inputs example: fjord&width=100&height=100')
 }
 res.sendFile(newImage);
 }
