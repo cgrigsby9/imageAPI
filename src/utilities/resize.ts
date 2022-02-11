@@ -1,17 +1,20 @@
 //processImage.ts - image processing module
 const sharp = require('sharp');
+import path from 'path';
+
 
 export async function resize(
-  path: string,
+  image: string,
   width: number,
   height: number,
-  name: string
+  
 ): Promise<void> {
   //Resize file using sharp
-  await sharp(path)
+  const fullImageFilepath = path.join(__dirname, '../../images', `${image}.jpg`)
+  await sharp(fullImageFilepath)
     .resize({
       width: width,
       height: height,
     })
-    .toFile(`${name}_${width}_${height}.jpg`);
+    .toFile(`${image}_${width}_${height}.jpg`);
 }

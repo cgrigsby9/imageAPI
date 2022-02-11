@@ -33,7 +33,7 @@ router.get('/', async (req: Request, res: Response): Promise<void> => {
     res.sendFile(newImage);
 } else {
     try {
-  await resize(localImage, widthNum, heightNum, image);
+  await resize(image, widthNum, heightNum);
   await fsPromises
     .copyFile(resizedImage, newImage)
     .then(function () {
@@ -42,7 +42,7 @@ router.get('/', async (req: Request, res: Response): Promise<void> => {
           res.send("check URL for correct inputs")
           return;
         } else {
-          console.log(`deleted file: ${resizedImage}`);
+          console.log(`saved file: ${resizedImage}`);
         }
       });
     })
